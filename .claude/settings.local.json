@@ -13,7 +13,15 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(railway version:*)",
-      "Bash(railway:*)"
+      "Bash(railway:*)",
+      "Bash(curl:*)",
+      "Bash(brew install:*)",
+      "Bash({ echo \"Trying npm...\")",
+      "Bash(})",
+      "Bash(gh repo create:*)",
+      "Bash(fly auth login:*)",
+      "Bash(fly launch:*)",
+      "Bash(git push:*)"
     ]
   }
 }
