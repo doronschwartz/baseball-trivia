@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baseball Trivia</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#9918;</text></svg>">
+</head>
+<body>
+  <div class="container">
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen active">
+      <div class="logo">&#9918;</div>
+      <h1>Baseball Trivia</h1>
+      <p class="subtitle">Test your baseball knowledge with friends</p>
+
+      <div class="game-modes">
+        <h2>Pick a game</h2>
+        <button class="game-btn" data-game="trivia">
+          <div class="game-icon">&#10067;</div>
+          <div class="game-info">
+            <span class="game-title">Trivia</span>
+            <span class="game-desc">Multiple choice baseball questions</span>
+          </div>
+        </button>
+        <button class="game-btn" data-game="tictactoe">
+          <div class="game-icon">&#11093;</div>
+          <div class="game-info">
+            <span class="game-title">Tic Tac Toe</span>
+            <span class="game-desc">Answer questions to claim squares</span>
+          </div>
+        </button>
+        <button class="game-btn" data-game="pinpoint">
+          <div class="game-icon">&#127919;</div>
+          <div class="game-info">
+            <span class="game-title">Pinpoint</span>
+            <span class="game-desc">Name players, teams & stats</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="join-section">
+        <h2>Join a friend's game</h2>
+        <div class="join-form">
+          <input type="text" id="join-code" placeholder="Room code" maxlength="4" autocomplete="off" spellcheck="false">
+          <button id="join-btn">Join</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Name Entry Screen -->
+    <div id="name-screen" class="screen">
+      <h2>What's your name?</h2>
+      <input type="text" id="player-name" placeholder="Enter your name" maxlength="20" autocomplete="off">
+      <button id="confirm-name-btn">Continue</button>
+      <button class="back-btn" data-target="home-screen">Back</button>
+    </div>
+
+    <!-- Lobby Screen -->
+    <div id="lobby-screen" class="screen">
+      <h2>Game Lobby</h2>
+      <div class="room-code-display">
+        <span>Room Code</span>
+        <span id="room-code" class="code"></span>
+        <button id="copy-code-btn">Copy</button>
+      </div>
+      <div class="game-type-display">
+        Playing <span id="lobby-game-type"></span>
+      </div>
+      <div class="players-list">
+        <h3>Players</h3>
+        <ul id="player-list"></ul>
+      </div>
+      <button id="start-game-btn" class="host-only" style="display:none;">Start Game</button>
+      <p class="waiting-msg">Waiting for host to start...</p>
+      <button class="back-btn leave-btn">Leave</button>
+    </div>
+
+    <!-- Trivia Game Screen -->
+    <div id="trivia-screen" class="screen">
+      <div class="game-header">
+        <span class="question-counter">Question <span id="trivia-q-num">1</span>/10</span>
+        <div class="scores-mini" id="trivia-scores"></div>
+      </div>
+      <div class="question-card">
+        <h2 id="trivia-question"></h2>
+        <div class="options" id="trivia-options"></div>
+      </div>
+      <div class="answer-status" id="trivia-status"></div>
+      <div class="answer-reveal" id="trivia-reveal" style="display:none;">
+        <h3>Answer: <span id="correct-answer"></span></h3>
+        <div id="player-answers"></div>
+        <button id="next-question-btn" class="host-only" style="display:none;">Next Question</button>
+      </div>
+    </div>
+
+    <!-- Tic Tac Toe Game Screen -->
+    <div id="tictactoe-screen" class="screen">
+      <div class="game-header">
+        <span class="turn-indicator">Turn: <span id="current-player"></span></span>
+        <div class="scores-mini" id="ttt-scores"></div>
+      </div>
+      <div class="ttt-board" id="ttt-board"></div>
+      <div class="ttt-question" id="ttt-question" style="display:none;">
+        <h3 id="ttt-q-text"></h3>
+        <div class="options" id="ttt-options"></div>
+      </div>
+      <div class="ttt-result" id="ttt-result" style="display:none;"></div>
+    </div>
+
+    <!-- Pinpoint Game Screen -->
+    <div id="pinpoint-screen" class="screen">
+      <div class="game-header">
+        <span class="round-counter">Round <span id="pinpoint-round">1</span>/5</span>
+        <div class="scores-mini" id="pinpoint-scores"></div>
+      </div>
+      <div class="pinpoint-card">
+        <h2 id="pinpoint-title"></h2>
+        <p class="pinpoint-clue" id="pinpoint-clue"></p>
+        <div class="pinpoint-inputs" id="pinpoint-inputs"></div>
+        <button id="submit-pinpoint-btn">Submit</button>
+      </div>
+      <div class="pinpoint-reveal" id="pinpoint-reveal" style="display:none;">
+        <h3>Answers</h3>
+        <div id="pinpoint-answers"></div>
+        <button id="next-round-btn" class="host-only" style="display:none;">Next Round</button>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="screen">
+      <h1>Game Over</h1>
+      <div class="final-scores" id="final-scores"></div>
+      <div class="button-group">
+        <button id="play-again-btn">Play Again</button>
+        <button class="btn-secondary" id="home-btn">Home</button>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="error-toast" class="toast"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
