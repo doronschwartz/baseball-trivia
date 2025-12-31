@@ -21,7 +21,8 @@
       "Bash(gh repo create:*)",
       "Bash(fly auth login:*)",
       "Bash(fly launch:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(echo:*)"
     ]
   }
 }
